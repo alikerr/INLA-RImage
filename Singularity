@@ -21,15 +21,16 @@ From:  rocker/r-ver:latest
         R -e "install.packages('MASS')"
         R -e "install.packages('psych')"
 
-       #echo "DONE with dependencies?"
-       #sleep 10
+        # echo "DONE with dependencies?"
+        # sleep 10
 
         R -e 'install.packages("INLA", repos="https://inla.r-inla-download.org/R/stable")'
         R -e 'update.packages("INLA", dep=TRUE)'
         
-        #wget https://i-pri.org/special/Biostatistics/Software/gINLAnd/gINLAnd_0.0.0.tar.gz
-        R -e 'install.packages(pkgs='https://i-pri.org/special/Biostatistics/Software/gINLAnd/gINLAnd_0.0.0.tar.gz' , repos=NULL , type='source')'
-        
+        R -e 'download.file("https://i-pri.org/special/Biostatistics/Software/gINLAnd/gINLAnd_0.0.0.tar.gz", "gINLAnd")'
+
+        R -e 'install.packages("gINLAnd", repos = NULL, type = "source")'
+                
         mkdir /global
         mkdir /global/scratch
         mkdir /scratch
@@ -37,4 +38,5 @@ From:  rocker/r-ver:latest
 
 %run
         R --version
+        
         
